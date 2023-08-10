@@ -435,7 +435,7 @@ class Settings{
                     </div>
                     <br>
                     <div class="ac-game-settings-acwing">
-                        <img width="30" src="https://app5756.acapp.acwing.com.cn/static/image/settings/acwing_logo.png">
+                        <img width="30" src="https://app5757.acapp.acwing.com.cn/static/image/settings/acwing_logo.png">
                         <br>
                         <div>
                             AcWing一键登录
@@ -473,7 +473,7 @@ class Settings{
                     </div>
                     <br>
                     <div class="ac-game-settings-acwing">
-                        <img width="30" src="https://app5756.acapp.acwing.com.cn/static/image/settings/acwing_logo.png">
+                        <img width="30" src="https://app5757.acapp.acwing.com.cn/static/image/settings/acwing_logo.png">
                         <br>
                         <div>
                             AcWing一键登录
@@ -498,6 +498,7 @@ class Settings{
         this.$register_login = this.$register.find(".ac-game-settings-option");
         this.root.$ac_game.append(this.$settings);
         this.$register.hide();
+        this.$acwing_login = this.$settings.find('.ac-game-settings-acwing img');
         this.start();
     }
     start(){
@@ -505,8 +506,12 @@ class Settings{
         this.add_listening_events();
     }
     add_listening_events(){
+        let outer = this;
         this.add_listening_events_login();
         this.add_listening_events_register();
+        this.$acwing_login.click(function(){
+            outer.acwing_login();
+        });
     }
     add_listening_events_login(){
         let outer = this;
@@ -525,6 +530,19 @@ class Settings{
         this.$register_submit.click(function(){
             outer.register_on_remote();
         });
+        
+    }
+    acwing_login(){
+        $.ajax({
+            url:"https://app5757.acapp.acwing.com.cn/settings/acwing/web/apply_code/",
+            type:"GET",
+            success:function(resp){
+                console.log(resp);
+                if(resp.result === "success"){
+                    window.location.replace(resp.apply_code_url);
+                }
+            }
+        })
     }
     login_on_remote(){  //  在远程服务器上登录
         let outer = this;
@@ -532,7 +550,7 @@ class Settings{
         let password = this.$login_password.val();
         this.$login_error_message.empty();
         $.ajax({
-            url:"https://app5756.acapp.acwing.com.cn/settings/login/",
+            url:"https://app5757.acapp.acwing.com.cn/settings/login/",
             type:"GET",
             data:{
                 username: username,
@@ -556,7 +574,7 @@ class Settings{
         let password_confirm = this.$register_password_confirm.val();
         this.$register_error_message.empty();
         $.ajax({
-            url:"https://app5756.acapp.acwing.com.cn/settings/register/",
+            url:"https://app5757.acapp.acwing.com.cn/settings/register/",
             type:"GET",
             data:{
                 username: username,
@@ -577,7 +595,7 @@ class Settings{
         if (this.platform ==="ACAPP")return false;
 
         $.ajax({
-            url: "https://app5756.acapp.acwing.com.cn/settings/logout/",
+            url: "https://app5757.acapp.acwing.com.cn/settings/logout/",
             type: "GET",
             success: function(resp){
                 console.log(resp);
@@ -598,7 +616,7 @@ class Settings{
     getinfo(){
         let outer = this;
         $.ajax({
-            url:"https://app5756.acapp.acwing.com.cn/settings/getinfo/",
+            url:"https://app5757.acapp.acwing.com.cn/settings/getinfo/",
             type:"GET",
             data:{
                 platform: outer.platform,

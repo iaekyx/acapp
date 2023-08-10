@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-8#p)i!de606k)b$=(@#nl=u&811wa3(_9fc+9x26@#9#)x@8a-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["124.221.15.178","app5756.acapp.acwing.com.cn"]
+ALLOWED_HOSTS = ["124.221.15.178","app5757.acapp.acwing.com.cn"]
 
 # Application definition
 
@@ -79,8 +79,16 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
-
+ACHES = {
+    'default': {
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': 'redis://127.0.0.1:6379/1',
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        },
+    },
+}
+USER_AGENTS_CACHE = 'default'
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 
