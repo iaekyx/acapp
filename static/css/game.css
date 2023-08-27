@@ -96,7 +96,7 @@
      width: 20vw;
      position: relative;
      top: 50%;
-     left:50%;
+     left: 50%;
      transform: translate(-50%,-50%);
      background-color: rgba(0,0,0,0.7);
      border-radius:5px;
@@ -132,9 +132,15 @@
     transition:100ms;
 }
 .ac-game-playground{
+    background-color: grey;
     height: 100%;
     width: 100%;
     user-select: none;
 }
-
+.ac-game-playground >canvas{
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
 
