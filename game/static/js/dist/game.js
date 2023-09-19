@@ -180,7 +180,8 @@ class Player extends AcGameObject{
         this.friction = 0.9;
         this.cur_skill = null;
         this.spent_time = 0;
-
+        this.recolor = color;
+        this.nctime = 0;
         if(this.character !== "robot"){
             this.img = new Image();
             this.img.src = this.photo;
@@ -271,6 +272,17 @@ class Player extends AcGameObject{
             let tx = player.x + player.speed * this.vx * this.timedelta/1000 * 0.3;
             let ty = player.y + player.speed * this.vy * this.timedelta/1000 * 0.3;
             this.shoot_fireball(tx,ty);
+        }
+        if(this.character ==="robot" && this.color === "rgba(0, 0, 0, 0)"){
+            this.nctime += this.timedelta/1000;
+            if(this.nctime>2){
+                this.nctime = 0;
+                this.color = this.recolor;
+            }
+        }
+        if(this.character ==="robot" && this.spent_time >4 && Math.random()<1/300.0){
+            this.color = "rgba(0, 0, 0, 0)";
+
         }
         if(this.damage_speed > this.eps){
             this.vx = 0,this.vy = 0;
